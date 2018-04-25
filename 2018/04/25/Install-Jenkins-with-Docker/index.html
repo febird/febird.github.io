@@ -3,15 +3,19 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Archives: 2017/7 | Febird&#39;s Sky</title>
+  <title>Install Jenkins with Docker | Febird&#39;s Sky</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Febird&#39;s Sky">
-<meta property="og:url" content="https://febird.github.io/archives/2017/07/index.html">
+  <meta name="description" content="docker确实是一个伟大的发明，有了她，一切变得简单！ sudo docker pull jenkinssudo docker run -d –name myjenkins -p 8080:8080 -v /var/jenkins_home jenkins  –restart=always 两条命令之后，访问:http://localhost:8080继续配置后就可以享用Jenkins了。 do">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Install Jenkins with Docker">
+<meta property="og:url" content="https://febird.github.io/2018/04/25/Install-Jenkins-with-Docker/index.html">
 <meta property="og:site_name" content="Febird&#39;s Sky">
+<meta property="og:description" content="docker确实是一个伟大的发明，有了她，一切变得简单！ sudo docker pull jenkinssudo docker run -d –name myjenkins -p 8080:8080 -v /var/jenkins_home jenkins  –restart=always 两条命令之后，访问:http://localhost:8080继续配置后就可以享用Jenkins了。 do">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-04-25T06:42:52.996Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Febird&#39;s Sky">
+<meta name="twitter:title" content="Install Jenkins with Docker">
+<meta name="twitter:description" content="docker确实是一个伟大的发明，有了她，一切变得简单！ sudo docker pull jenkinssudo docker run -d –name myjenkins -p 8080:8080 -v /var/jenkins_home jenkins  –restart=always 两条命令之后，访问:http://localhost:8080继续配置后就可以享用Jenkins了。 do">
   
     <link rel="alternate" href="/atom.xml" title="Febird&#39;s Sky" type="application/atom+xml">
   
@@ -64,172 +68,56 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/07/25/Android-USB-OTG-Function/" class="archive-article-date">
-  <time datetime="2017-07-25T06:42:00.000Z" itemprop="datePublished">Jul 25</time>
+        <section id="main"><article id="post-Install-Jenkins-with-Docker" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/25/Install-Jenkins-with-Docker/" class="article-date">
+  <time datetime="2018-04-25T06:33:59.000Z" itemprop="datePublished">2018-04-25</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/25/Android-USB-OTG-Function/">Android的USB OTG功能</a>
+    <h1 class="article-title" itemprop="name">
+      Install Jenkins with Docker
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/07/25/displaylink-android/" class="archive-article-date">
-  <time datetime="2017-07-25T01:14:58.000Z" itemprop="datePublished">Jul 25</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/25/displaylink-android/">在Android手机上使用Displaylink外置显卡</a>
-    </h1>
-  
+        <p>docker确实是一个伟大的发明，有了她，一切变得简单！</p>
+<p>sudo docker pull jenkins<br>sudo docker run -d –name myjenkins -p 8080:8080 -v /var/jenkins_home jenkins  –restart=always</p>
+<p>两条命令之后，访问:<br><a href="http://localhost:8080" target="_blank" rel="noopener">http://localhost:8080</a><br>继续配置后就可以享用Jenkins了。</p>
+<p>docker的默认路径在：<br>/var/lib/docker，所有东西在这里找。<br>比如<br>jenkins的workspase，在/var/lib/docker/volumes/XXXXXXXXXX/_data<br>Jenkins -v 挂载的/var/jenkins_home是对于容器的路径，在host里是看不到的</p>
+<p>通过<br>sudo docker inspect myjenkins<br>可以一看究竟。<br>如果要修改已经运行的容器，可以先暂停docker服务，然后找到容器的配置文件修改之<br>/var/lib/docker/containers/XXXXXXX/hostconfig.json</p>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/07/22/R-language/" class="archive-article-date">
-  <time datetime="2017-07-22T08:39:44.000Z" itemprop="datePublished">Jul 22</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/22/R-language/">R语言画三角函数图形</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/07/21/MirrorLink/" class="archive-article-date">
-  <time datetime="2017-07-21T01:53:58.000Z" itemprop="datePublished">Jul 21</time>
-</a>
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://febird.github.io/2018/04/25/Install-Jenkins-with-Docker/" data-id="cjgeqgi5x0005z5qq6t6xkrqw" class="article-share-link">Share</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/21/MirrorLink/">手机支持MirrorLink很难吗？</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/07/14/Zhongshan-City/" class="archive-article-date">
-  <time datetime="2017-07-14T06:57:55.000Z" itemprop="datePublished">Jul 14</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/14/Zhongshan-City/">中山行政区划</a>
-    </h1>
-  
-
-    </header>
+    </footer>
   </div>
-</article>
   
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/07/14/Hubei-GDP/" class="archive-article-date">
-  <time datetime="2017-07-14T03:48:05.000Z" itemprop="datePublished">Jul 14</time>
-</a>
-      
+<nav id="article-nav">
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/14/Hubei-GDP/">湖北GDP排名</a>
-    </h1>
   
+    <a href="/2018/04/19/Install-MantisBT/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Install MantisBT</div>
+    </a>
+  
+</nav>
 
-    </header>
-  </div>
+  
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/07/06/Audio-Assistant-Smart-Speaker/" class="archive-article-date">
-  <time datetime="2017-07-06T07:12:19.000Z" itemprop="datePublished">Jul 6</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/06/Audio-Assistant-Smart-Speaker/">关于智能音箱</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/07/04/HongKong-Macao-Zhuhai-Bridge/" class="archive-article-date">
-  <time datetime="2017-07-04T12:09:31.000Z" itemprop="datePublished">Jul 4</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/04/HongKong-Macao-Zhuhai-Bridge/">港珠澳大桥年底通车</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
 
 </section>
         
