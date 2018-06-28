@@ -3,15 +3,19 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Archives: 2018 | Febird&#39;s Sky</title>
+  <title>Install Redmine with Docker | Febird&#39;s Sky</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Febird&#39;s Sky">
-<meta property="og:url" content="https://febird.github.io/archives/2018/index.html">
+  <meta name="description" content="安装sudo docker pull mysql:5.7sudo docker pull redmine:3.2sudo docker run -d -p 3307:3306 –name mymysql –restart=always -e MYSQL_ROOT_PASSWORD=”pass”  -e MYSQL_DATABASE=redmine mysql:5.7 –character-set-">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Install Redmine with Docker">
+<meta property="og:url" content="https://febird.github.io/2018/04/25/Install-Redmine-with-Docker/index.html">
 <meta property="og:site_name" content="Febird&#39;s Sky">
+<meta property="og:description" content="安装sudo docker pull mysql:5.7sudo docker pull redmine:3.2sudo docker run -d -p 3307:3306 –name mymysql –restart=always -e MYSQL_ROOT_PASSWORD=”pass”  -e MYSQL_DATABASE=redmine mysql:5.7 –character-set-">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-04-27T11:54:22.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Febird&#39;s Sky">
+<meta name="twitter:title" content="Install Redmine with Docker">
+<meta name="twitter:description" content="安装sudo docker pull mysql:5.7sudo docker pull redmine:3.2sudo docker run -d -p 3307:3306 –name mymysql –restart=always -e MYSQL_ROOT_PASSWORD=”pass”  -e MYSQL_DATABASE=redmine mysql:5.7 –character-set-">
   
     <link rel="alternate" href="/atom.xml" title="Febird&#39;s Sky" type="application/atom+xml">
   
@@ -64,96 +68,70 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/04/27/Mysql-utf8-and-utf8mb4/" class="archive-article-date">
-  <time datetime="2018-04-27T07:11:32.000Z" itemprop="datePublished">Apr 27</time>
+        <section id="main"><article id="post-Install-Redmine-with-Docker" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/25/Install-Redmine-with-Docker/" class="article-date">
+  <time datetime="2018-04-25T12:56:15.000Z" itemprop="datePublished">2018-04-25</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/04/27/Mysql-utf8-and-utf8mb4/">Mysql utf8 and utf8mb4</a>
+    <h1 class="article-title" itemprop="name">
+      Install Redmine with Docker
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/04/25/Install-Redmine-with-Docker/" class="archive-article-date">
-  <time datetime="2018-04-25T12:56:15.000Z" itemprop="datePublished">Apr 25</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/04/25/Install-Redmine-with-Docker/">Install Redmine with Docker</a>
-    </h1>
-  
+        <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>sudo docker pull mysql:5.7<br>sudo docker pull redmine:3.2<br>sudo docker run -d -p 3307:3306 –name mymysql –restart=always -e MYSQL_ROOT_PASSWORD=”pass”  -e MYSQL_DATABASE=redmine mysql:5.7 –character-set-server=utf8mb4 –collation-server=utf8mb4_unicode_ci<br>sudo docker run -d -p 8081:3000 –name myredmine –restart=always -e MYSQL_ROOT_PASSWORD=”pass” –link mymysql:mysql -v /var/redmine:/usr/src/redmine redmine:3.2 </p>
+<p>这里一定要注意，默认mysql image 如果不指定字符集，倒时候数据库不支持中文的，后期改起来很麻烦</p>
+<h1 id="访问"><a href="#访问" class="headerlink" title="访问"></a>访问</h1><p>sudo docker start myredmine<br><a href="http://localhost:8081" target="_blank" rel="noopener">http://localhost:8081</a><br>admin/admin</p>
+<h1 id="后续维护"><a href="#后续维护" class="headerlink" title="后续维护"></a>后续维护</h1><p>#Backup</p>
+<p>docker exec mymysql /usr/bin/mysqldump -u root –password=root DATABASE &gt; backup.sql</p>
+<p>#Restore<br>docker exec -i mymysql /usr/bin/mysql -u root –password=root DATABASE &lt; backup.sql</p>
+<p>#执行Shell<br>docker exec -it mymysql /bin/bash</p>
+<p>#文件拷贝<br>docker cp mymysql:/var/lib/mysql/redmine ./ </p>
+<p>#其他<br>docker stop mymysql<br>docker rm   mymysql<br>docker rmi  (id)</p>
+<p>Redmine 和 Mysql都是Docker服务<br>如果 Redmine 连接宿主机器的 mysql</p>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/04/25/Install-Jenkins-with-Docker/" class="archive-article-date">
-  <time datetime="2018-04-25T06:33:59.000Z" itemprop="datePublished">Apr 25</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/04/25/Install-Jenkins-with-Docker/">Install Jenkins with Docker</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/04/19/Install-MantisBT/" class="archive-article-date">
-  <time datetime="2018-04-19T13:00:06.000Z" itemprop="datePublished">Apr 19</time>
-</a>
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://febird.github.io/2018/04/25/Install-Redmine-with-Docker/" data-id="cjixzksrz000d8jqq1rdvirnd" class="article-share-link">Share</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/04/19/Install-MantisBT/">Install MantisBT</a>
-    </h1>
-  
-
-    </header>
+      
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/04/27/Mysql-utf8-and-utf8mb4/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Mysql utf8 and utf8mb4
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/04/25/Install-Jenkins-with-Docker/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Install Jenkins with Docker</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
 
 </section>
         

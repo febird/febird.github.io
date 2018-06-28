@@ -66,6 +66,89 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Mysql-utf8-and-utf8mb4" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/27/Mysql-utf8-and-utf8mb4/" class="article-date">
+  <time datetime="2018-04-27T07:11:32.000Z" itemprop="datePublished">2018-04-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/27/Mysql-utf8-and-utf8mb4/">Mysql utf8 and utf8mb4</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>utf8mb4和utf8区别如下：<br>MySQL在5.5.3之后增加了这个utf8mb4的编码，mb4就是most bytes 4的意思，专门用来兼容四字节的unicode。好在utf8mb4是utf8的超集，除了将编码改为utf8mb4外不需要做其他转换。当然，为了节省空间，一般情况下使用utf8也就够了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://febird.github.io/2018/04/27/Mysql-utf8-and-utf8mb4/" data-id="cjixzkssj000q8jqq7jlas89b" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Install-Redmine-with-Docker" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/25/Install-Redmine-with-Docker/" class="article-date">
+  <time datetime="2018-04-25T12:56:15.000Z" itemprop="datePublished">2018-04-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/25/Install-Redmine-with-Docker/">Install Redmine with Docker</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>sudo docker pull mysql:5.7<br>sudo docker pull redmine:3.2<br>sudo docker run -d -p 3307:3306 –name mymysql –restart=always -e MYSQL_ROOT_PASSWORD=”pass”  -e MYSQL_DATABASE=redmine mysql:5.7 –character-set-server=utf8mb4 –collation-server=utf8mb4_unicode_ci<br>sudo docker run -d -p 8081:3000 –name myredmine –restart=always -e MYSQL_ROOT_PASSWORD=”pass” –link mymysql:mysql -v /var/redmine:/usr/src/redmine redmine:3.2 </p>
+<p>这里一定要注意，默认mysql image 如果不指定字符集，倒时候数据库不支持中文的，后期改起来很麻烦</p>
+<h1 id="访问"><a href="#访问" class="headerlink" title="访问"></a>访问</h1><p>sudo docker start myredmine<br><a href="http://localhost:8081" target="_blank" rel="noopener">http://localhost:8081</a><br>admin/admin</p>
+<h1 id="后续维护"><a href="#后续维护" class="headerlink" title="后续维护"></a>后续维护</h1><p>#Backup</p>
+<p>docker exec mymysql /usr/bin/mysqldump -u root –password=root DATABASE &gt; backup.sql</p>
+<p>#Restore<br>docker exec -i mymysql /usr/bin/mysql -u root –password=root DATABASE &lt; backup.sql</p>
+<p>#执行Shell<br>docker exec -it mymysql /bin/bash</p>
+<p>#文件拷贝<br>docker cp mymysql:/var/lib/mysql/redmine ./ </p>
+<p>#其他<br>docker stop mymysql<br>docker rm   mymysql<br>docker rmi  (id)</p>
+<p>Redmine 和 Mysql都是Docker服务<br>如果 Redmine 连接宿主机器的 mysql</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://febird.github.io/2018/04/25/Install-Redmine-with-Docker/" data-id="cjixzksrz000d8jqq1rdvirnd" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Install-Jenkins-with-Docker" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/04/25/Install-Jenkins-with-Docker/" class="article-date">
@@ -89,7 +172,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>docker确实是一个伟大的发明，有了她，一切变得简单！</p>
-<p>sudo docker pull jenkins<br>sudo docker run -d –name myjenkins -p 8080:8080 -v /var/jenkins_home jenkins  –restart=always</p>
+<p>sudo docker pull jenkins<br>sudo docker run -d –name myjenkins -p 8080:8080 -v /var/jenkins:/var/jenkins_home jenkins  –restart=always</p>
 <p>两条命令之后，访问:<br><a href="http://localhost:8080" target="_blank" rel="noopener">http://localhost:8080</a><br>继续配置后就可以享用Jenkins了。</p>
 <p>docker的默认路径在：<br>/var/lib/docker，所有东西在这里找。<br>比如<br>jenkins的workspase，在/var/lib/docker/volumes/XXXXXXXXXX/_data<br>Jenkins -v 挂载的/var/jenkins_home是对于容器的路径，在host里是看不到的</p>
 <p>通过<br>sudo docker inspect myjenkins<br>可以一看究竟。<br>如果要修改已经运行的容器，可以先暂停docker服务，然后找到容器的配置文件修改之<br>/var/lib/docker/containers/XXXXXXX/hostconfig.json</p>
@@ -97,7 +180,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://febird.github.io/2018/04/25/Install-Jenkins-with-Docker/" data-id="cjgeqgi5x0005z5qq6t6xkrqw" class="article-share-link">Share</a>
+      <a data-url="https://febird.github.io/2018/04/25/Install-Jenkins-with-Docker/" data-id="cjixzksrs00098jqq2prw0klq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -147,7 +230,7 @@ administrator/root
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://febird.github.io/2018/04/19/Install-MantisBT/" data-id="cjgeqgi600008z5qqj6ve3pot" class="article-share-link">Share</a>
+      <a data-url="https://febird.github.io/2018/04/19/Install-MantisBT/" data-id="cjixzksrw000b8jqqiygwc2tb" class="article-share-link">Share</a>
       
       
     </footer>
@@ -197,7 +280,7 @@ administrator/root
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://febird.github.io/2017/07/25/Android-USB-OTG-Function/" data-id="cjgeqgi5s0003z5qqfxmt4bob" class="article-share-link">Share</a>
+      <a data-url="https://febird.github.io/2017/07/25/Android-USB-OTG-Function/" data-id="cjixzksr900018jqqznaxj0jv" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
@@ -241,7 +324,7 @@ administrator/root
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://febird.github.io/2017/07/25/displaylink-android/" data-id="cjgeqgi6l000kz5qqaq3ysvud" class="article-share-link">Share</a>
+      <a data-url="https://febird.github.io/2017/07/25/displaylink-android/" data-id="cjixzkss9000i8jqqqe8bjm4s" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
@@ -282,7 +365,7 @@ administrator/root
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://febird.github.io/2017/07/22/R-language/" data-id="cjgeqgi69000fz5qq14s3arez" class="article-share-link">Share</a>
+      <a data-url="https://febird.github.io/2017/07/22/R-language/" data-id="cjixzksse000m8jqq58fk8oe5" class="article-share-link">Share</a>
       
       
     </footer>
@@ -323,7 +406,7 @@ administrator/root
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://febird.github.io/2017/07/21/MirrorLink/" data-id="cjgeqgi67000dz5qqog3zuscw" class="article-share-link">Share</a>
+      <a data-url="https://febird.github.io/2017/07/21/MirrorLink/" data-id="cjixzkss6000h8jqqhzwt78ni" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IOT/">IOT</a></li></ul>
@@ -366,7 +449,7 @@ administrator/root
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://febird.github.io/2017/07/14/Zhongshan-City/" data-id="cjgeqgi6i000jz5qq49gn9t4e" class="article-share-link">Share</a>
+      <a data-url="https://febird.github.io/2017/07/14/Zhongshan-City/" data-id="cjixzkssh000p8jqq9tgb1s6b" class="article-share-link">Share</a>
       
       
     </footer>
@@ -407,90 +490,7 @@ administrator/root
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://febird.github.io/2017/07/14/Hubei-GDP/" data-id="cjgeqgi5u0004z5qq5xmg0rqh" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Audio-Assistant-Smart-Speaker" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/07/06/Audio-Assistant-Smart-Speaker/" class="article-date">
-  <time datetime="2017-07-06T07:12:19.000Z" itemprop="datePublished">2017-07-06</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/06/Audio-Assistant-Smart-Speaker/">关于智能音箱</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>2014年亚马逊发布了Echo，2015年Google发布了Google Home，并于2016年再次更新，今年苹果发布的HomePod智能音箱，微软发布的Cortana音箱产品…</p>
-<p>亚马逊Echo超预期的关注度迅速吸引了一大批智能家居厂家跟进，并带来了一波智能音箱跟风热潮，好似这必定是智能家居人机交互的入口，语音控制这个东西，在手机上只是一个玩具，使用场景有限，毕竟对着手机讲话发指令只适合一个人的私密场合，同时手机麦克风拾音范围有限，而正是这些原因，让智能音箱在家庭这个场景下完全符合这些特征，阵列麦克风技术解决了语音识别范围的问题，家里又是一个相对私密的环境，同时音乐播放、查询天气、智能家居控制也正好有需求。<br>可以智能音箱是外在，大家看好的是AI+IoT的未来，这可是个万亿级的市场，谁也不想掉队。</p>
-<p>放眼国内，2015年国内就发布产品的京东-讯飞的叮咚，已走过三个年头，依靠京东微连和家电巨头的生态链，做到了国内的第一。今年BATJ再次发力，百度收购ProjectFlow，阿里发布天猫精灵，腾讯即将发布”耳朵”产品，京东发布Dingdong二代，而国内智能家居自成一体的小米米家，迟迟未动，我预计今年肯定会发布一款重磅语音产品（小白摄像头语音功能只是试水）。</p>
-<p>以我的理解，京东阿里肯定会走亚马逊的路线，通过自身的电商平台，要求或吸引各大电器电子厂商既接入，而小米则更像苹果主要以自家生态为主，腾讯则朝着谷歌看齐，而百度可能只有智能车..</p>
-<p>几个链接：<br><a href="http://devsmart.jd.com/" target="_blank" rel="noopener">京东微连</a><br><a href="https://open.aliplus.com/" target="_blank" rel="noopener">阿里智能</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://febird.github.io/2017/07/06/Audio-Assistant-Smart-Speaker/" data-id="cjgeqgi620009z5qqyk3ygsli" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IOT/">IOT</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-HongKong-Macao-Zhuhai-Bridge" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/07/04/HongKong-Macao-Zhuhai-Bridge/" class="article-date">
-  <time datetime="2017-07-04T12:09:31.000Z" itemprop="datePublished">2017-07-04</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/04/HongKong-Macao-Zhuhai-Bridge/">港珠澳大桥年底通车</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>港珠澳大桥,这个横跨珠江口的巨型通道眼看17年年底就要通车了，很多人说这个桥修成了就是一个废物，是面子工程，因为没有连接深圳。而珠三角地区，深圳的汽车保有量最多，超过了香港澳门珠海三地的车辆总和。</p>
-<p>这种说法有一定的道理，但我觉得，珠江口从虎门大桥往下游延伸距离近百公里，未来肯定不止一座桥，最好是四座，每隔30km一座，这 a样才是最方便的，那么港珠澳大桥算是最下游的桥，直接联通最远的两个端点，也可以给港澳带来直通的便利，给珠江西岸带来广阔的发展空间。</p>
-<p>另外，那些说港珠澳大桥没有连接深圳的，未来深港西部会再来一条公铁两用快速通道，连接深圳机场，直达香港机场，并连接港珠澳大桥，深圳的车现在去香港不方便，未来肯定比现在方便，因为天朝只说了50年对港政策不动摇，现在已经过了20年，30年后呢？</p>
-<p><img src="https://febird.github.io/images/hk-zh-mc-bridge.jpg" alt="港珠澳大桥"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://febird.github.io/2017/07/04/HongKong-Macao-Zhuhai-Bridge/" data-id="cjgeqgi6f000hz5qqowmalk7o" class="article-share-link">Share</a>
+      <a data-url="https://febird.github.io/2017/07/14/Hubei-GDP/" data-id="cjixzksrp00088jqqug82klbo" class="article-share-link">Share</a>
       
       
     </footer>
@@ -548,6 +548,14 @@ administrator/root
       <ul>
         
           <li>
+            <a href="/2018/04/27/Mysql-utf8-and-utf8mb4/">Mysql utf8 and utf8mb4</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/25/Install-Redmine-with-Docker/">Install Redmine with Docker</a>
+          </li>
+        
+          <li>
             <a href="/2018/04/25/Install-Jenkins-with-Docker/">Install Jenkins with Docker</a>
           </li>
         
@@ -557,14 +565,6 @@ administrator/root
         
           <li>
             <a href="/2017/07/25/Android-USB-OTG-Function/">Android的USB OTG功能</a>
-          </li>
-        
-          <li>
-            <a href="/2017/07/25/displaylink-android/">在Android手机上使用Displaylink外置显卡</a>
-          </li>
-        
-          <li>
-            <a href="/2017/07/22/R-language/">R语言画三角函数图形</a>
           </li>
         
       </ul>

@@ -5,17 +5,17 @@
   
   <title>Install Jenkins with Docker | Febird&#39;s Sky</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="docker确实是一个伟大的发明，有了她，一切变得简单！ sudo docker pull jenkinssudo docker run -d –name myjenkins -p 8080:8080 -v /var/jenkins_home jenkins  –restart=always 两条命令之后，访问:http://localhost:8080继续配置后就可以享用Jenkins了。 do">
+  <meta name="description" content="docker确实是一个伟大的发明，有了她，一切变得简单！ sudo docker pull jenkinssudo docker run -d –name myjenkins -p 8080:8080 -v /var/jenkins:/var/jenkins_home jenkins  –restart=always 两条命令之后，访问:http://localhost:8080继续配置后就可以享">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Install Jenkins with Docker">
 <meta property="og:url" content="https://febird.github.io/2018/04/25/Install-Jenkins-with-Docker/index.html">
 <meta property="og:site_name" content="Febird&#39;s Sky">
-<meta property="og:description" content="docker确实是一个伟大的发明，有了她，一切变得简单！ sudo docker pull jenkinssudo docker run -d –name myjenkins -p 8080:8080 -v /var/jenkins_home jenkins  –restart=always 两条命令之后，访问:http://localhost:8080继续配置后就可以享用Jenkins了。 do">
+<meta property="og:description" content="docker确实是一个伟大的发明，有了她，一切变得简单！ sudo docker pull jenkinssudo docker run -d –name myjenkins -p 8080:8080 -v /var/jenkins:/var/jenkins_home jenkins  –restart=always 两条命令之后，访问:http://localhost:8080继续配置后就可以享">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-25T06:42:52.996Z">
+<meta property="og:updated_time" content="2018-06-28T03:25:07.185Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Install Jenkins with Docker">
-<meta name="twitter:description" content="docker确实是一个伟大的发明，有了她，一切变得简单！ sudo docker pull jenkinssudo docker run -d –name myjenkins -p 8080:8080 -v /var/jenkins_home jenkins  –restart=always 两条命令之后，访问:http://localhost:8080继续配置后就可以享用Jenkins了。 do">
+<meta name="twitter:description" content="docker确实是一个伟大的发明，有了她，一切变得简单！ sudo docker pull jenkinssudo docker run -d –name myjenkins -p 8080:8080 -v /var/jenkins:/var/jenkins_home jenkins  –restart=always 两条命令之后，访问:http://localhost:8080继续配置后就可以享">
   
     <link rel="alternate" href="/atom.xml" title="Febird&#39;s Sky" type="application/atom+xml">
   
@@ -91,7 +91,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>docker确实是一个伟大的发明，有了她，一切变得简单！</p>
-<p>sudo docker pull jenkins<br>sudo docker run -d –name myjenkins -p 8080:8080 -v /var/jenkins_home jenkins  –restart=always</p>
+<p>sudo docker pull jenkins<br>sudo docker run -d –name myjenkins -p 8080:8080 -v /var/jenkins:/var/jenkins_home jenkins  –restart=always</p>
 <p>两条命令之后，访问:<br><a href="http://localhost:8080" target="_blank" rel="noopener">http://localhost:8080</a><br>继续配置后就可以享用Jenkins了。</p>
 <p>docker的默认路径在：<br>/var/lib/docker，所有东西在这里找。<br>比如<br>jenkins的workspase，在/var/lib/docker/volumes/XXXXXXXXXX/_data<br>Jenkins -v 挂载的/var/jenkins_home是对于容器的路径，在host里是看不到的</p>
 <p>通过<br>sudo docker inspect myjenkins<br>可以一看究竟。<br>如果要修改已经运行的容器，可以先暂停docker服务，然后找到容器的配置文件修改之<br>/var/lib/docker/containers/XXXXXXX/hostconfig.json</p>
@@ -99,7 +99,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://febird.github.io/2018/04/25/Install-Jenkins-with-Docker/" data-id="cjgeqgi5x0005z5qq6t6xkrqw" class="article-share-link">Share</a>
+      <a data-url="https://febird.github.io/2018/04/25/Install-Jenkins-with-Docker/" data-id="cjixzksrs00098jqq2prw0klq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -107,6 +107,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="/2018/04/25/Install-Redmine-with-Docker/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Install Redmine with Docker
+        
+      </div>
+    </a>
   
   
     <a href="/2018/04/19/Install-MantisBT/" id="article-nav-older" class="article-nav-link-wrap">
@@ -162,6 +171,14 @@
       <ul>
         
           <li>
+            <a href="/2018/04/27/Mysql-utf8-and-utf8mb4/">Mysql utf8 and utf8mb4</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/25/Install-Redmine-with-Docker/">Install Redmine with Docker</a>
+          </li>
+        
+          <li>
             <a href="/2018/04/25/Install-Jenkins-with-Docker/">Install Jenkins with Docker</a>
           </li>
         
@@ -171,14 +188,6 @@
         
           <li>
             <a href="/2017/07/25/Android-USB-OTG-Function/">Android的USB OTG功能</a>
-          </li>
-        
-          <li>
-            <a href="/2017/07/25/displaylink-android/">在Android手机上使用Displaylink外置显卡</a>
-          </li>
-        
-          <li>
-            <a href="/2017/07/22/R-language/">R语言画三角函数图形</a>
           </li>
         
       </ul>
